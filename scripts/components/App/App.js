@@ -36,6 +36,7 @@ export class App {
   _initTradeWidget() {
     this._tradeWidget = new TradeWidget({
       element: this._el.querySelector('[data-element="trade-widget"]'),
+      balance: this._userBalance,
     })
 
     this._tradeWidget.on('buy', e => {
