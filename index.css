@@ -48,3 +48,7 @@ form, form > div {
 .hidden {
     display: none;
 }
+
+.data-table thead th {
+    cursor: pointer;
+}
