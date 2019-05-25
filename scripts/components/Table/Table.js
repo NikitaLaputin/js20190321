@@ -17,26 +17,33 @@ export class Table extends BaseComponent {
     this._el.addEventListener('click', e => {
       if(!e.target.closest('th')) return;
 
-      let cellIndex = e.target.cellIndex,
-          sortBy = e.target.dataset.type;
-      this._colSotred = (this._lastCol === cellIndex) ? !this._colSotred : false;
-      this._lastCol = cellIndex;
-      if(!sortBy) return;
-
-      [...rows].sort( (a, b) => {
-        let rowA = a.cells[cellIndex].textContent,
-            rowB = b.cells[cellIndex].textContent;
-        return (sortBy === 'string') ? 
-          !this._colSotred ? 
-            rowA.localeCompare(rowB) :
-            rowB.localeCompare(rowA) : 
-            !this._colSotred ? 
-              +rowA - +rowB :
-              +rowB - +rowA
+      let headerClick = new CustomEvent('filter', {
+        detail: {
+          type: e.target.dataset.type,
+          property: e.target.dataset.property,
         }
-      ).forEach( row => {
-          this._el.querySelector('tbody').append(row);
-        });
+      });
+      this._el.dispatchEvent(headerClick);
+      // let cellIndex = e.target.cellIndex,
+      //     sortBy = e.target.dataset.type;
+      // this._colSotred = (this._lastCol === cellIndex) ? !this._colSotred : false;
+      // this._lastCol = cellIndex;
+      // if(!sortBy) return;
+
+      // [...rows].sort( (a, b) => {
+      //   let rowA = a.cells[cellIndex].textContent,
+      //       rowB = b.cells[cellIndex].textContent;
+      //   return (sortBy === 'string') ? 
+      //     !this._colSotred ? 
+      //       rowA.localeCompare(rowB) :
+      //       rowB.localeCompare(rowA) : 
+      //       !this._colSotred ? 
+      //         +rowA - +rowB :
+      //         +rowB - +rowA
+      //   }
+      // ).forEach( row => {
+      //     this._el.querySelector('tbody').append(row);
+      //   });
     })
 
     this._el.addEventListener('input', e => {
@@ -48,6 +55,10 @@ export class Table extends BaseComponent {
         else row.classList.remove('hidden');
       });
     });
+  }
+
+  displayData(data) {
+    this._render(data);
   }
 
   _onRowClick(e) {
@@ -65,16 +76,13 @@ export class Table extends BaseComponent {
     
      _render(data) {
         this._el.innerHTML = `
-        <div class="input-field col s4">
-          <input id="search" placeholder="Search crypto..." type="text">
-        </div>
         <table class="data-table highlight"> 
           <thead>
             <tr>
-              <th data-type="string">Name</th>
-              <th data-type="string">Symbol</th>
-              <th data-type="number">Rank</th>
-              <th data-type="number">Price</th>
+              <th data-type="string" data-property="name">Name</th>
+              <th data-type="string" data-property="symbol">Symbol</th>
+              <th data-type="number" data-property="rank">Rank</th>
+              <th data-type="number" data-property="price">Price</th>
             </tr>
           </thead>
           <tbody>
