@@ -35,8 +35,8 @@ export class Portfolio {
             <ul class="collapsible portfolio">
               <li>
                 <p class="collapsible-header">
-                    Current balance: ${this._balance.toFixed(2)}.
-                    Portfolio Worth: ${this._portfolioWorth.toFixed(2)}
+                    Current balance: ${this._balance}.
+                    Portfolio Worth: ${this._portfolioWorth}
                 </p>
                 <div class="collapsible-body">
                 ${
@@ -58,8 +58,8 @@ export class Portfolio {
                             <tr data-id="${item.id}">
                                 <td>${item.name}</td>
                                 <td>${item.amount}</td>
-                                <td>${item.price.toFixed(2)}</td>
-                                <td>${item.total.toFixed(2)}</td>
+                                <td>${item.price}</td>
+                                <td>${item.total}</td>
                             </tr>
                           `).join('')}
                       </tbody>

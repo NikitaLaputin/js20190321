@@ -44,11 +44,3 @@ tr td {
 form, form > div {
     padding-left: 0 !important;
 }
-
-.hidden {
-    display: none;
-}
-
-.data-table thead th {
-    cursor: pointer;
-}

@@ -5,7 +5,7 @@ function isNumeric(n) {
 }
 
 export class TradeWidget extends BaseComponent {
-  constructor({ element, balance }) {
+  constructor({ element }) {
       super();
       this._el = element;
 
@@ -13,12 +13,6 @@ export class TradeWidget extends BaseComponent {
         if (!e.target.closest('#amount')) return;
 
         const value = +e.target.value;
-
-        if(this._currentItem.price * value > balance)
-          this._el.querySelector('#amount').classList.add('invalid');
-        else {
-          this._el.querySelector('#amount').classList.remove('invalid');
-        }
         this._updateDisplay(value);
       })
 
@@ -28,8 +22,6 @@ export class TradeWidget extends BaseComponent {
         }
 
         if (e.target.closest('[data-id="buy"]')) {
-          if(this._el.querySelector('.invalid')) return;
-
           let buyEvent = new CustomEvent('buy', {
             detail: {
               amount: +this._el.querySelector('#amount').value,
@@ -43,7 +35,7 @@ export class TradeWidget extends BaseComponent {
 
       this._el.addEventListener('keydown', e => {
         if (!e.target.closest('#amount')) return;
-        
+
         const { key } = e;
         if (!isNumeric(key) && key !== 'Backspace') {
           e.preventDefault();
@@ -64,7 +56,7 @@ export class TradeWidget extends BaseComponent {
 
   _updateDisplay(value) {
     this._totalEl = this._el.querySelector('#item-total')
-    this._totalEl.textContent = (this._currentItem.price * value).toFixed(2);
+    this._totalEl.textContent = this._currentItem.price * value;
   }
 
   _render(item) {
@@ -82,7 +74,6 @@ export class TradeWidget extends BaseComponent {
                 <div class="input-field col s4">
                     <input id="amount" type="text">
                     <label for="amount">Amount</label>
-                    <span class="helper-text" data-error="Amount is too high"></span>
                 </div>
             </form>
           </div>
