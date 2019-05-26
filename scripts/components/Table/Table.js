@@ -24,26 +24,6 @@ export class Table extends BaseComponent {
         }
       });
       this._el.dispatchEvent(headerClick);
-      // let cellIndex = e.target.cellIndex,
-      //     sortBy = e.target.dataset.type;
-      // this._colSotred = (this._lastCol === cellIndex) ? !this._colSotred : false;
-      // this._lastCol = cellIndex;
-      // if(!sortBy) return;
-
-      // [...rows].sort( (a, b) => {
-      //   let rowA = a.cells[cellIndex].textContent,
-      //       rowB = b.cells[cellIndex].textContent;
-      //   return (sortBy === 'string') ? 
-      //     !this._colSotred ? 
-      //       rowA.localeCompare(rowB) :
-      //       rowB.localeCompare(rowA) : 
-      //       !this._colSotred ? 
-      //         +rowA - +rowB :
-      //         +rowB - +rowA
-      //   }
-      // ).forEach( row => {
-      //     this._el.querySelector('tbody').append(row);
-      //   });
     })
 
     this._el.addEventListener('input', e => {
