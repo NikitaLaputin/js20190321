@@ -53,6 +53,15 @@ export class App {
     this._table.on('rowClick', e => {
       this.tradeItem(e.detail.id)
     });
+
+    this._table.on('sort', async e => {
+      let data = await DataService.getCurrencies({filter: { 
+        type: e.detail.type,
+        property: e.detail.property,
+      }});
+      this._data = data;
+      this._table.displayData(this._data);
+    })
   }
 
   async fetchData() {

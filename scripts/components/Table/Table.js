@@ -17,7 +17,7 @@ export class Table extends BaseComponent {
     this._el.addEventListener('click', e => {
       if(!e.target.closest('th')) return;
 
-      let headerClick = new CustomEvent('filter', {
+      let headerClick = new CustomEvent('sort', {
         detail: {
           type: e.target.dataset.type,
           property: e.target.dataset.property,
