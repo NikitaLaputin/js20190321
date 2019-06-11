@@ -8,6 +8,7 @@ import DataService from '../../services/DataService.js';
 
 export class App {
   constructor({ element }) {
+    console.log('hi`')
     this._el = element;
     this._userBalance = 10000;
      
